@@ -1,3 +1,5 @@
+
+
 import pandas as pd
 
 data = pd.read_csv('nasdaq100_padding.csv',usecols=[0,1])
