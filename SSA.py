@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-data = pd.read_csv('nasdaq100_padding.csv',usecols=[0,1])
+data = pd.read_csv('../data/nasdaq100_padding.csv',usecols=[0,1])
 
 
 import numpy as np
@@ -28,5 +28,3 @@ plt.plot(X[0], 'o-', label='Original')
 plt.plot(X_ssa[0, 0], 'o--', label='SSA')
 plt.legend(loc='best', fontsize=14)
 plt.show()
-print("zq")
-print("zq1")
