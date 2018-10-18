@@ -3,8 +3,6 @@
 import pandas as pd
 
 data = pd.read_csv('../data/nasdaq100_padding.csv',usecols=[0,1])
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 from pyts.decomposition import SSA
