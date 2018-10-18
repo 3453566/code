@@ -18,3 +18,7 @@ plt.imshow(X_mtf[11], cmap='rainbow', origin='lower')
 plt.show()
 
 
+
+
+
+
