@@ -22,6 +22,6 @@ X = rng.randn(n_samples, n_features)
 
 # Plot the first time series
 data = cvsDataLoad.loadData()
-dataLine = pd.read_csv('../data/nasdaq100_padding.csv', usecols=[0])
+dataLine = pd.read_csv('../data/nasdaq100_padding.csv', usecols=[2])
 plt.plot(dataLine)
 plt.show()
