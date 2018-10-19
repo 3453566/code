@@ -15,7 +15,7 @@ y_train = keras.utils.to_categorical(np.random.randint(10, size=(1000, 1)), num_
 x_test = np.random.random((100, 20))
 y_test = keras.utils.to_categorical(np.random.randint(10, size=(100, 1)), num_classes=10)
 print(x_test[1])
-"""
+
 model = Sequential()
 # Dense(64) 是一个具有 64 个隐藏神经元的全连接层。
 # 在第一层必须指定所期望的输入数据尺寸：
@@ -34,7 +34,7 @@ model.compile(loss='categorical_crossentropy',
 
 
 
-tbCallBack = TensorBoard(log_dir='./logs',  # log 目录
+tbCallBack = TensorBoard(log_dir='../../logs',  # log 目录
                  histogram_freq=0,  # 按照何等频率（epoch）来计算直方图，0为不计算
                #            batch_size=32,     # 用多大量的数据计算直方图
                  write_graph=True,  # 是否存储网络结构图
@@ -61,4 +61,3 @@ from keras.utils.vis_utils import model_to_dot
 SVG(model_to_dot(model).create(prog='dot', format='svg'))
 #依赖 pydot-ng 和 graphviz，若出现错误，用命令行输入
 #pip install pydot-ng & brew install graphviz
-"""
