@@ -16,8 +16,8 @@ numpy.random.seed(seed)
 # load dataset
 dataframe = pandas.read_csv("../../data/iris.csv", header=None)
 dataset = dataframe.values
-X = dataset[:, 0:4].astype(float)
-Y = dataset[:, 4]
+X = dataset[:, 0:3].astype(float)
+Y = dataset[:, 3]
 
 # encode class values as integers
 encoder = LabelEncoder()
@@ -29,8 +29,8 @@ dummy_y = np_utils.to_categorical(encoded_Y)
 
 # create model
 model = Sequential()
-model.add(Dense(8, input_dim=4, activation='relu', name="layer1"))
-model.add(Dense(3, activation='softmax', name="layer2"))
+model.add(Dense(8, input_dim=3, activation='relu', name="layer1"))
+model.add(Dense(22, activation='softmax', name="layer2"))
 # Compile model
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
@@ -42,5 +42,5 @@ tensorBoardCallBack = keras.callbacks.TensorBoard(log_dir='../../logs',
                                                   write_images=True)
 
 model.fit(X, dummy_y, epochs=EPOCHS, batch_size=5, verbose=DEBUG_LEVEL, callbacks=[tensorBoardCallBack],
-          validation_split=0.33)
+          validation_split=0.66)
 
