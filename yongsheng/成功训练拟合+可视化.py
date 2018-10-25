@@ -48,7 +48,7 @@ tbCallBack = TensorBoard(log_dir='../../logs',  # log 目录
                  embeddings_metadata=None)
 
 # model.fit(x_train, y_train, nb_epoch=64, batch_size=20, verbose=0)   
-hist = model.fit(x, y, batch_size=10, nb_epoch=1, shuffle=True, verbose=0, validation_split=0.2, callbacks=[tbCallBack])
+hist = model.fit(x, y, batch_size=10, nb_epoch=30, shuffle=True, verbose=0, validation_split=0.2, callbacks=[tbCallBack])
 print(hist.history)
 score = model.evaluate(x, y, batch_size=10)
 
