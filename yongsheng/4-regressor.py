@@ -1,53 +1,51 @@
-
-
 # please note, all tutorial code are running under python3.5.
 # If you use the version like python2.7, please modify the code accordingly
 
-# 5 - Classifier example
+# 4 - Regressor example
 
 import numpy as np
 np.random.seed(1337)  # for reproducibility
-from keras.datasets import mnist
-from keras.utils import np_utils
 from keras.models import Sequential
-from keras.layers import Dense, Activation
-from keras.optimizers import RMSprop
+from keras.layers import Dense
+import matplotlib.pyplot as plt
+import pandas
 
-# download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
-# X shape (60,000 28x28), y shape (10,000, )
-(X_train, y_train), (X_test, y_test) = mnist.load_data()
+# load dataset
+dataframe = pandas.read_csv("../../data/yongsheng1.csv", header=None)
+dataset = dataframe.values
+x = dataset[:, 0:3].astype(float).reshape(500,3)
+y = dataset[:, 3].astype(float).reshape(500,1)
+# plot data
+#plt.scatter(x[2], y)
+#plt.show()
 
-# data pre-processing
-X_train = X_train.reshape(X_train.shape[0], -1) / 255.   # normalize
-X_test = X_test.reshape(X_test.shape[0], -1) / 255.      # normalize
-y_train = np_utils.to_categorical(y_train, num_classes=10)
-y_test = np_utils.to_categorical(y_test, num_classes=10)
+#X_train, Y_train = x[:160], y[:160]     # first 160 data points
+#X_test, Y_test = x[160:], y[160:]       # last 40 data points
 
-# Another way to build your neural net
-model = Sequential([
-    Dense(32, input_dim=784),
-    Activation('relu'),
-    Dense(10),
-    Activation('softmax'),
-])
+# build a neural network from the 1st layer to the last layer
+model = Sequential()
+model.add(Dense(3, input_shape=(3,)))
+model.add(Dense(1))
 
-# Another way to define your optimizer
-rmsprop = RMSprop(lr=0.001, rho=0.9, epsilon=1e-08, decay=0.0)
+# choose loss function and optimizing method
+model.compile(loss='mse', optimizer='sgd')
 
-# We add metrics to get more results you want to see
-model.compile(optimizer=rmsprop,
-              loss='categorical_crossentropy',
-              metrics=['accuracy'])
+# training
+print('Training -----------')
+for step in range(301):
+    cost = model.train_on_batch(x, y)
+    if step % 100 == 0:
+        print('train cost: ', cost)
 
-print('Training ------------')
-# Another way to train the model
-model.fit(X_train, y_train, epochs=2, batch_size=32)
-
+# test
 print('\nTesting ------------')
-# Evaluate the model with the metrics we defined earlier
-loss, accuracy = model.evaluate(X_test, y_test)
+cost = model.evaluate(x, y, batch_size=40)
+print('test cost:', cost)
+W, b = model.layers[0].get_weights()
+print('Weights=', W, '\nbiases=', b)
 
-print('test loss: ', loss)
-print('test accuracy: ', accuracy)
-
-
+# plotting the prediction
+y_pred = model.predict(x)
+plt.scatter(x[2], y)
+plt.plot(x[2], y_pred)
+plt.show()

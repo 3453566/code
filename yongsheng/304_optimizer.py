@@ -10,6 +10,7 @@ numpy
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas
 
 tf.set_random_seed(1)
 np.random.seed(1)
@@ -17,10 +18,11 @@ np.random.seed(1)
 LR = 0.01
 BATCH_SIZE = 32
 
-# fake data
-x = np.linspace(-1, 1, 100)[:, np.newaxis]          # shape (100, 1)
-noise = np.random.normal(0, 0.1, size=x.shape)
-y = np.power(x, 2) + noise                          # shape (100, 1) + some noise
+# load dataset
+dataframe = pandas.read_csv("../../data/yongsheng1.csv", header=None)
+dataset = dataframe.values
+x = dataset[:, 2].astype(float).reshape(1328,1)
+y = dataset[:, 3].astype(float).reshape(1328,1)
 
 # plot dataset
 plt.scatter(x, y)

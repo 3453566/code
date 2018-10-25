@@ -1,4 +1,4 @@
-EPOCHS = 100
+EPOCHS = 30
 DEBUG_LEVEL = 1
 
 import keras
@@ -14,25 +14,17 @@ seed = 7
 numpy.random.seed(seed)
 
 # load dataset
-dataframe = pandas.read_csv("../../data/iris.csv", header=None)
+dataframe = pandas.read_csv("../../data/yongsheng.csv", header=None)
 dataset = dataframe.values
 X = dataset[:, 0:3].astype(float)
-Y = dataset[:, 3]
-
-# encode class values as integers
-encoder = LabelEncoder()
-encoder.fit(Y)
-encoded_Y = encoder.transform(Y)
-
-# convert integers to dummy variables (i.e. one hot encoded)
-dummy_y = np_utils.to_categorical(encoded_Y)
+Y = dataset[:, 3].astype(float)
 
 # create model
 model = Sequential()
-model.add(Dense(8, input_dim=3, activation='relu', name="layer1"))
-model.add(Dense(22, activation='softmax', name="layer2"))
+model.add(Dense(8, input_dim=3,  name="layer1"))
+model.add(Dense(1, activation='relu', name="layer2"))
 # Compile model
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss='mse', optimizer='sgd', metrics=['accuracy'])
 
 # fit & log
 tensorBoardCallBack = keras.callbacks.TensorBoard(log_dir='../../logs',
@@ -41,6 +33,6 @@ tensorBoardCallBack = keras.callbacks.TensorBoard(log_dir='../../logs',
                                                   write_grads=True,  # 是否可视化梯度直方图
                                                   write_images=True)
 
-model.fit(X, dummy_y, epochs=EPOCHS, batch_size=5, verbose=DEBUG_LEVEL, callbacks=[tensorBoardCallBack],
+model.fit(X, Y, epochs=EPOCHS, batch_size=5, verbose=DEBUG_LEVEL, callbacks=[tensorBoardCallBack],
           validation_split=0.66)
 

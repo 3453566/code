@@ -39,7 +39,7 @@ class cvsDataLoad:
 
     def loadData_yongsheng(self):
         # load dataset
-        dataframe = pandas.read_csv("../data/yongsheng1.csv", header=None)
+        dataframe = pandas.read_csv("../../data/yongsheng1.csv", header=None)
         dataset = dataframe.values
         x = dataset[:, 2].astype(float).reshape(len(dataframe), 1)
         y = dataset[:, 3].astype(float).reshape(len(dataframe), 1)

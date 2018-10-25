@@ -1,12 +1,4 @@
-"""
-Know more, visit my Python tutorial page: https://morvanzhou.github.io/tutorials/
-My Youtube Channel: https://www.youtube.com/user/MorvanZhou
 
-Dependencies:
-tensorflow: 1.1.0
-matplotlib
-numpy
-"""
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
@@ -18,7 +10,7 @@ tf.set_random_seed(1)
 np.random.seed(1)
 
 # load dataset
-dataframe = pandas.read_csv("../../data/yongsheng.csv", header=None)
+dataframe = pandas.read_csv("../../data/yongsheng1.csv", header=None)
 dataset = dataframe.values
 x = dataset[:, 2].astype(float).reshape(1328,1)
 y = dataset[:, 3].astype(float).reshape(1328,1)
@@ -57,3 +49,4 @@ for step in range(10000):
 
 plt.ioff()
 plt.show()
+
