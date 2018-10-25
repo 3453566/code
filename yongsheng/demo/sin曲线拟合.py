@@ -1,3 +1,5 @@
+#https://blog.csdn.net/csmqq/article/details/51424919
+#https://blog.csdn.net/csmqq/article/details/51461696
 
 from keras.models import Sequential
 from keras.layers.core import Dense, Activation
@@ -61,12 +63,12 @@ model.compile(loss='mean_squared_error', optimizer="rmsprop", metrics=["accuracy
 
 # model.fit(x_train, y_train, nb_epoch=64, batch_size=20, verbose=0)   
 hist = model.fit(x_test, y_test, batch_size=10, nb_epoch=100, shuffle=True, verbose=0, validation_split=0.2)
-# print(hist.history)
+print(hist.history)
 score = model.evaluate(x_test, y_test, batch_size=10)
 
 out = model.predict(x_prd, batch_size=1)
 # plot prediction data
-
+model.layers[0]
 ax.plot(x_prd, out, 'k--', lw=4)
 ax.set_xlabel('Measured')
 ax.set_ylabel('Predicted')

@@ -7,7 +7,7 @@ import numpy as np
 #     x_data = np.random.rand(100).astype(np.float32)
 #     y_data = 0.3*x_data+0.1
 
-data = pd.read_csv('../../data/yongsheng2.csv',usecols=[0,1]) #读第1,2列，的数据表
+data = pd.read_csv('../../data/yongsheng.csv',usecols=[0,1]) #读第1,2列，的数据表
 x_data = np.array(data['x'])[0:100]
 y_data = np.array(data['y'])[0:100]
 print('x_data=',x_data)

@@ -15,6 +15,7 @@ np.random.seed(1337)  # for reproducibility
 from keras.models import Sequential
 from keras.layers import Dense
 import matplotlib.pyplot as plt
+from keras.models import model_from_json
 
 # create some data
 X = np.linspace(-1, 1, 200)
@@ -54,3 +55,7 @@ Y_pred = model.predict(X_test)
 plt.scatter(X_test, Y_test)
 plt.plot(X_test, Y_pred)
 plt.show()
+
+json_string = model.to_json()
+print(json_string)
+model = model_from_json(json_string)
